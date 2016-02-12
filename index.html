@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Youtube MP3 downloader</title>
+
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
+
+  <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="js/angular.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+
+  <script type="text/javascript" src="js/angular/app.js"></script>
+  <script type="text/javascript" src="js/angular/service.js"></script>
+  <style>
+
+    .large {
+      font-size: 125%;
+    }
+
+    .extra-large {
+      font-size: 150%;
+    }
+
+    * {
+      -webkit-user-select: none;
+      user-select: none;
+    }
+  </style>
+</head>
+
+
+<body ng-app="app">
+<div class="" ng-controller="mainCtrl">
+  <div class="row">
+    <div class="col s12">
+      <h2>Download</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s5">
+      <div class="file-field input-field">
+        <div class="btn waves-effect waves-light">
+          <span>Save to</span>
+          <input type="file" nwdirectory="directoryPath">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate valid" type="text">
+        </div>
+      </div>
+    </div>
+    <div class="col s5">
+      <div class="btn waves-effect waves-light" ng-show="directoryPath"
+           style="height: 3rem; line-height: 3rem; margin-top: 1rem;" ng-click="download()" ng-bind="state">
+      </div>
+    </div>
+  </div>
+  <div class="row" ng-show="directoryPath">
+    <div class="col s12">
+      <div class="progress">
+        <div class="determinate" ng-style="{width: progress+'%'}"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col s12">
+      <h2>Songs</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <textarea id="allSongs" class="materialize-textarea" ng-model="list" ng-change="parse()"></textarea>
+      <label for="allSongs">all songs</label>
+    </div>
+    <div class="col s12">
+      <div class="btn waves-effect waves-light" ng-click="addSong()">
+        Add song
+      </div>
+    </div>
+    <song data="value" remove="removeSong(value)" ng-repeat="(key, value) in songs"></song>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<div class="col s12 m6 l4">
+  <div class="card-panel">
+    <span class="card-title">
+      <div class="progress" ng-show="song.control.progress > 0">
+        <div class="determinate" ng-style="{width: song.control.progress+'%'}"></div>
+      </div>
+      <i class="material-icons small btn waves-effect waves-dark"
+         ng-class="{'mdi-navigation-expand-less': cardOpened, 'mdi-navigation-expand-more': !cardOpened}"
+         ng-click="cardOpened = !cardOpened"></i>
+      <i class="material-icons small mdi-content-clear btn waves-effect waves-dark right" ng-click="remove()"></i>
+      <div class="input-field">
+        <input id="fullTitle" type="text" class="validate" ng-model="song.fullTitle" ng-change="fullTitle.set()">
+        <label for="fullTitle" class="extra-large" ng-class="{active: song.fullTitle}">full title</label>
+      </div>
+    </span>
+    <span class="card-content" ng-show="cardOpened">
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="{{key}}_artist" type="text" class="validate" ng-model="song.artist" ng-change="fullTitle.get()">
+            <label for="{{key}}_artist" ng-class="{active: song.artist}">artist</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="{{key}}_title" type="text" class="validate" ng-model="song.title" ng-change="fullTitle.get()">
+            <label for="{{key}}_title" ng-class="{active: song.title}">title</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="{{key}}_album" type="text" class="validate" ng-model="song.album" ng-change="fullTitle.get()">
+            <label for="{{key}}_album" ng-class="{active: song.album}">album</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="{{key}}_tags" type="text" class="validate" ng-model="song.tags" ng-change="fullTitle.get()">
+            <label for="{{key}}_tags" ng-class="{active: song.tags}">tags (optional)</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="{{key}}_url" type="url" class="validate" ng-model="song.url" ng-change="fullTitle.get()">
+            <label for="{{key}}_url" ng-class="{active: song.url}">url (optional)</label>
+          </div>
+          <div class="col s12" ng-show="song.url">
+            <div class="video-container">
+              <iframe ng-src="{{song.url | ytEmbed | trustUrl}}" frameborder="0"></iframe>
+            </div>
+          </div>
+          <div class="input-field col s12">
+            <input id="{{key}}_thumbnail" type="url" class="validate" ng-model="song.thumbnail">
+            <label for="{{key}}_thumbnail" ng-class="{active: song.thumbnail}">Thumbnail (optional)</label>
+          </div>
+          <div class="col s12" ng-show="song.thumbnail">
+            <img class="responsive-img" alt="Thumbnail" ng-src="{{song.thumbnail | trustUrl }}"/>
+          </div>
+        </div>
+    </span>
+  </div>
+</div>
